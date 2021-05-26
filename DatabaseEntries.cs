@@ -13,6 +13,12 @@ namespace PluginNamer
 
         public void FindEntries(string rootPath)
         {
+            FindEntries_internal(Path.Combine(rootPath, "Effects"));
+            FindEntries_internal(Path.Combine(rootPath, "Generators"));
+        }
+
+        private void FindEntries_internal(string rootPath)
+        {
             var directories = Directory.GetDirectories(rootPath);
             var files = Directory.GetFiles(rootPath, "*.nfo");
 
@@ -23,7 +29,7 @@ namespace PluginNamer
 
             foreach (var directory in directories)
             {
-                FindEntries(directory);
+                FindEntries_internal(directory);
             }
         }
 
